@@ -17,7 +17,7 @@ namespace WebBanana
     {
         // Application arguments in order
         public static string VoiceMeeterDLL = "C:\\Program Files(x86)\\VB\\Voicemeeter\\VoicemeeterRemote64.dll";
-        public static string ipAndPort = "http://192.168.1.43:5090/";
+        public static string ipAndPort = "http://127.0.0.1:5090/";
 
         static volatile Stopwatch StayAliveTimer;
         static readonly long StayAliveLimit = 2000;
@@ -50,7 +50,10 @@ namespace WebBanana
             {
                 if (StayAliveTimer.ElapsedMilliseconds > StayAliveLimit)
                 {
+#if !DEBUG
+                    Console.WriteLine("This process can only be run from within another application. It is closing itself now.");
                     QuitApplication();
+#endif
                 }
             }
         }

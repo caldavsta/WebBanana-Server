@@ -57,12 +57,15 @@ namespace UserInterface
 
         public void StartServerProcess()
         {
+            //build the correct relative path to the .dll
+            String pathToDLL = Process.GetCurrentProcess().MainModule.FileName.Replace(@"UserInterface\bin\Debug\UserInterface.exe", @"\WebBanana\bin\Debug\netcoreapp2.0\WebBanana.dll");
+
             serverProcess = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = "dotnet",
-                    Arguments = @"F:\school\WebBananaSolution\WebBanana\bin\Debug\netcoreapp2.0\WebBanana.dll",
+                    Arguments = pathToDLL,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardInput = true,
